@@ -1,37 +1,37 @@
 export class Num {
-    value: number
-  
-    constructor(n: number) {
-      this.value = n
-    }
-  
-    val(): number {
-      return this.value
-    }
-  
-    add(n2: Num): Num {
-      this.value += n2.val()
-      return this
-    }
-  
-    toString(): string {
-      return this.val().toString()
-    }
-  
-    static addAll(numArr: Array<Num>): Num {
-      return new Num(numArr.map((n) => n.val()).reduce((a, b) => a + b, 0))
-    }
+  value: number;
+
+  constructor(n: number) {
+    this.value = n;
   }
-  
-  /***
-   * Go to TypeScript's official website https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html to read more.
-   *
-   * The following text is copied from
-   * https://github.com/microsoft/TypeScript-New-Handbook/blob/master/intros/TypeScript%20for%20the%20New%20Programmer.md
-   * and is under the MIT License
-   */
-  
-  /*
+
+  val(): number {
+    return this.value;
+  }
+
+  add(n2: Num): Num {
+    this.value += n2.val();
+    return this;
+  }
+
+  toString(): string {
+    return this.val().toString();
+  }
+
+  static addAll(numArr: Array<Num>): Num {
+    return new Num(numArr.map((n) => n.val()).reduce((a, b) => a + b, 0));
+  }
+}
+
+/***
+ * Go to TypeScript's official website https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html to read more.
+ *
+ * The following text is copied from
+ * https://github.com/microsoft/TypeScript-New-Handbook/blob/master/intros/TypeScript%20for%20the%20New%20Programmer.md
+ * and is under the MIT License
+ */
+
+/*
   
     * TypeScript for the New Programmer
       * What is JavaScript?

@@ -20,7 +20,7 @@ jobs:
       - name: Install modules
         run: npm ci
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Setup .npmrc file to publish to GitHub Packages
@@ -30,6 +30,6 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@warstekhun'
       - name: Publish to GitHub Packages
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

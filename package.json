@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "name": "typescript-npm-package-template",
-  "version": "1.0.1",
+  "name": "@warstekhun/typescript-npm-package-template",
+  "version": "1.0.2",
   "description": "Typescript NPM package template that is ready for NPM and Github Packages publish.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -22,7 +22,7 @@
     "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "comver": "node tools/versionManager.js",
-    "prepublishOnly": "npm run build && npm run package"
+    "prepublishOnly": "npm run package"
   },
   "files": [
     "dist"
