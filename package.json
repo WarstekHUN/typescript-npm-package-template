@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "@warstekhun/typescript-npm-package-template",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Typescript NPM package template that is ready for NPM and Github Packages publish.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
