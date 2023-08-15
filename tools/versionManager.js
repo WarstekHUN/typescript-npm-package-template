@@ -1,7 +1,6 @@
 const prompt = require("prompt");
 const { exec, ChildProcess } = require("child_process");
 const colors = require("@colors/colors");
-const rimraf = require("rimraf");
 
 prompt.start({
     colors: true,
@@ -24,10 +23,6 @@ async function waitForProcess(args) {
 (async () => {
     console.log(colors.bold("\n------------------------\nWelcome to the Version Manager!"));
     console.log("Every new version you create will be automatically commited, pushed, and then released to Github Packages and NPM.");
-
-    rimraf.moveRemove("./*.tgz", {
-        glob: true
-    })
 
     const version = (await prompt.get({
         pattern: /^((major|minor|patch|premajor|preminor|prepatch|prerelease|from-git)|\d+.\d+.\d+)$/,
