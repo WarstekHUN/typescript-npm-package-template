@@ -47,8 +47,8 @@
   - `npm run build:cjs`: Builds only the CommonJS version
   - `npm run build:umd`: Builds only the UMD version
   - `npm run build:types`: Builds only the types (d.ts)
-- Incrementing package version, creating commit:
-  - `npm run publish` or simply `npm run publish`: 
+- Release your project:
+  - `npm run release`: 
     - Builds the project
     - Increments version automatically.
       - Asks for new package version or level of incrementing
@@ -56,6 +56,8 @@
         - Asks for custom commit message. Default: incremented version number
     - Creates new commit and tag
     - Pushes to repository
+    - Creates new Github Release
+      - You can set your release notes in **CHANGELOG.md**
 
 ## Try your package before publishing
 ### Try it before publishing
@@ -82,7 +84,7 @@ console.log(new Num(5).add(new Num(6)).val() === 11)
 ```
 
 ## Publishing your package
-### Manual publishing to NPM
+### Manual publishing only to NPM
 
 Log in:
 
@@ -99,19 +101,35 @@ npm publish
 ### Using a Github Release (CI):
 - Publish your package to NPM and Github Packages at the same time!
   
+#### Creating a Github Release
+On every `npm run release` a Github Release will be automatically created, but in order to achieve that, you need to generate a **Personal Access Token**. And set it as a <a href="#SecretSetting">repository secret</a> with the name **PAT**.
+
+You can generate two types of tokens:
+
+- Tokens (classic) | I personally recommend this because you can set it to never expire.
+  - You must select these scopes:
+    - write:packages
+- Fine-grained tokens | Although this will expire max a year later and has to be renewed, you can set which repo it will work with.
+  - You must select these repository permissions:
+    - Actions
+    - Contents
+    - Pull requests
+
+TIP: **If the token does not show** up after generating, try deleting all Github's saved data from your browser. This is also true with NPM. 
+
 #### Publishing to NPM
 Follow [npm's official](https://docs.npmjs.com/creating-and-viewing-access-tokens) instruction to create an npm token. Choose "Publish" from the website, or use `npm token create` without argument with the CLI.
 **If you use 2FA**, then make sure it's enabled for authorization only instead of authorization and publishing **(Edit Profile -> Modify 2FA)**.
 
-On the page of your newly created or existing GitHub repo, click **Settings** -> **Secrets** -> **New repository secret**, the Name should be `NPM_TOKEN`` and the Value should be your npm token.
+<div id="SecretSetting"></div>
+
+On the page of your newly created or existing GitHub repo, click **Settings** -> **Secrets** -> **New repository secret**, the Name should be `NPM_TOKEN` and the Value should be your npm token.
 ### Publishing to Github Packages
-The default configuration of this example package **assumes you publish package with an unscoped name to npm**. GitHub Packages must be named with a scope name such as "@tomchen/example-typescript-package".
+The default configuration of this example package **assumes you publish package with an unscoped name to npm**. GitHub Packages must be named with a scope name such as "@warstekhun/typescript-npm-package-template".
 
-Change `scope: '@warstekhun'` to your own scope in **.github/workflows/publish.yml**, also change `addscope` in **package.json**.
+Change `scope: '@warstekhun'` to your own scope in **.github/workflows/publish.yml**.
 
-If you want to publish your package with a scoped name, change the name property in **package.json** and the scope from *@warstekhun* to yours at **.github/workflows/publish.yml:47**.
-
-<!-- If you publish package with a scoped name to npm, change the name to something like "@tomchen/example-typescript-package" in **package.json**, and remove the `- run: npm run addscope` line in **.github/workflows/publish.yml** -->
+If you want to publish your package with a scoped name, change the name property in **package.json** and the scope from *@warstekhun* to yours at **.github/workflows/publish.yml:49**.
 
 If you publish your package to npm only, and don't want to publish to GitHub Packages, then delete the lines from `- name: Setup .npmrc file to publish to GitHub Packages` to the end of the file in **.github/workflows/publish.yml**.
 
@@ -124,4 +142,4 @@ If you publish your package to npm only, and don't want to publish to GitHub Pac
 - [Publishing - TypeScript docs](https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html)
 - [Publishing Node.js packages - GitHub Docs](https://docs.github.com/en/free-pro-team@latest/actions/guides/publishing-nodejs-packages)
 
-Also, because this template project is a remastered version of Tom Scott's, if you want to publish a Python package, you should definetly start your project with his [Example PyPI (Python Package Index) Package & Tutorial / Instruction / Workflow for 2021](https://github.com/tomchen/example_pypi_package) template.
+This template project is a remastered version of Tom Scott's, if you want to publish a Python package, you should definetly start your project with his [Example PyPI (Python Package Index) Package & Tutorial / Instruction / Workflow for 2021](https://github.com/tomchen/example_pypi_package) template.
