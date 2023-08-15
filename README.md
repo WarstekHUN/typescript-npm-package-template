@@ -48,11 +48,14 @@
   - `npm run build:umd`: Builds only the UMD version
   - `npm run build:types`: Builds only the types (d.ts)
 - Incrementing package version, creating commit:
-  - `npm run comver`: 
+  - `npm run publish` or simply `npm run publish`: 
+    - Builds the project
     - Increments version automatically.
-    - Asks for new package version or level of incrementing
-      - Just like using *npm version*. Default: patch
-      - Asks for custom commit message. Default: incremented version number
+      - Asks for new package version or level of incrementing
+        - Just like using *npm version*. Default: patch
+        - Asks for custom commit message. Default: incremented version number
+    - Creates new commit and tag
+    - Pushes to repository
 
 ## Try your package before publishing
 ### Try it before publishing
