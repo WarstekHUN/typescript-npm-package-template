@@ -15,6 +15,7 @@
   - ESM
   - CommonJS
   - UMD
+  - Browser
 - Your to be published package'll can be ran both in browsers and with NodeJS
   - Tested on:
     - NodeJS: 16.x | 17.x | 18.x
@@ -83,20 +84,10 @@ import { Num } from 'typescript-npm-package-template';
 console.log(new Num(5).add(new Num(6)).val() === 11)
 ```
 
+## CI Testing
+Every commit and pull request is tested automatically on Node 16.x, 17.x and 18.x. You can set which node versions the tests should run on here: **.github/workflows/test.yml:30**.
+
 ## Publishing your package
-### Manual publishing only to NPM
-
-Log in:
-
-```bash
-npm adduser
-```
-
-And publish:
-
-```bash
-npm publish
-```
 
 ### Using a Github Release (CI):
 - Publish your package to NPM and Github Packages at the same time!
@@ -124,6 +115,7 @@ Follow [npm's official](https://docs.npmjs.com/creating-and-viewing-access-token
 <div id="SecretSetting"></div>
 
 On the page of your newly created or existing GitHub repo, click **Settings** -> **Secrets** -> **New repository secret**, the Name should be `NPM_TOKEN` and the Value should be your npm token.
+
 ### Publishing to Github Packages
 The default configuration of this example package **assumes you publish package with an unscoped name to npm**. GitHub Packages must be named with a scope name such as "@warstekhun/typescript-npm-package-template".
 
@@ -131,10 +123,24 @@ Change `scope: '@warstekhun'` to your own scope in **.github/workflows/publish.y
 
 If you want to publish your package with a scoped name, change the name property in **package.json** and the scope from *@warstekhun* to yours at **.github/workflows/publish.yml:49**.
 
-If you publish your package to npm only, and don't want to publish to GitHub Packages, then delete the lines from `- name: Setup .npmrc file to publish to GitHub Packages` to the end of the file in **.github/workflows/publish.yml**.
-
 (You might have noticed `secret.GITHUB_TOKEN` in **.github/workflows/publish.yml**. You don't need to set up a secret named `GITHUB_TOKEN` actually, it is [automatically created](https://docs.github.com/en/free-pro-team@latest/actions/reference/authentication-in-a-workflow#about-the-github_token-secret))
 
+
+### Manual publishing only to NPM
+
+If you publish your package to npm only, and don't want to publish to GitHub Packages, then delete the lines from `- name: Setup .npmrc file to publish to GitHub Packages` to the end of the file in **.github/workflows/publish.yml**.
+
+Log in:
+
+```bash
+npm adduser
+```
+
+And publish:
+
+```bash
+npm publish
+```
 
 ## References
 - [Creating and publishing unscoped public packages - npm docs](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages)

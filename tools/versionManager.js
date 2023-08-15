@@ -1,7 +1,6 @@
 const prompt = require("prompt");
 const { exec, ChildProcess } = require("child_process");
 const colors = require("@colors/colors");
-const rimraf = require("rimraf");
 
 prompt.start({
     colors: true,
@@ -24,10 +23,6 @@ async function waitForProcess(args) {
 (async () => {
     console.log(colors.bold("\n------------------------\nWelcome to the Version Manager!"));
     console.log("Every new version you create will be automatically commited, pushed, and then released to Github Packages and NPM.");
-
-    rimraf.moveRemove("./*.tgz", {
-        glob: true
-    })
 
     const version = (await prompt.get({
         pattern: /^((major|minor|patch|premajor|preminor|prepatch|prerelease|from-git)|\d+.\d+.\d+)$/,
@@ -56,6 +51,7 @@ async function waitForProcess(args) {
     
     if (commitMessage) {
         await waitForProcess(`npm version ${version} -m \"${commitMessage}\" --force`);
+        commitMessage = commitMessage.replace("%s", require("../package.json").version);
         console.log(`${colors.green("Created new version and commited successfully")}\nNew version: ${colors.bold(require("../package.json").version)}\nCommit message: ${colors.bold(commitMessage)}`)
     } else {
         await waitForProcess(`npm version ${version} --force`);
